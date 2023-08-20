@@ -26,6 +26,18 @@ int randomlimit;
 int randomnumber;
 int lastguess;
 
+// These are all for button-debounce-repeat
+// Sourced from Mr Blinky: https://community.arduboy.com/t/5856/3
+int buttonDebounceState; 
+int buttonDebounceDelay; 
+int buttonRepeatDelay;
+int oldButtonState;
+int buttonState;
+#define BUTTON_DEBOUNCE_DELAY 10 // time for button states to stabilise
+#define BUTTON_REPEAT_DELAY 250 // time before buttons start to repeat
+#define BUTTON_REPEAT_SPEED 125 // button repeat interval
+
+
 // State Machine Setup
 enum class GameState {
     Title,
@@ -35,6 +47,7 @@ enum class GameState {
 };
 // Variable for tracking State Machine current state
 GameState gameState = GameState::Playing;
+
 
 // Title Screen!
 const uint8_t PROGMEM title[] = {
@@ -150,7 +163,35 @@ void loop() {
 	
     a.clear(); // clear the screen
     a.pollButtons(); // track button presses since the last loop - used to only register single button presses at a time
+    int currentButtonState = a.buttonsState();
 
+    if (currentButtonState == buttonDebounceState) {
+        if (buttonDebounceDelay > 0) { // If still in debounce timeout period
+            buttonDebounceDelay--;
+        } else {
+            // debounce timeout expired, buttons state is not changing
+            if (currentButtonState == oldButtonState) {
+                if (buttonRepeatDelay > 0) {
+                    // still in repeat timeout period
+                    buttonRepeatDelay--;
+                    buttonState = 0;
+                } else {
+                    // repeat timeout expired, repeat button
+                    buttonState = oldButtonState;
+                    buttonRepeatDelay = BUTTON_REPEAT_SPEED;
+                }
+            } else {
+                // pressed buttons changed
+                buttonState = (~oldButtonState) & currentButtonState;
+                oldButtonState = currentButtonState;
+                buttonRepeatDelay = BUTTON_REPEAT_DELAY;
+            }
+        } ////////////////////////////
+    } else {
+        // Still bouncing
+        buttonDebounceState = currentButtonState;
+        buttonDebounceDelay = BUTTON_DEBOUNCE_DELAY;
+    }
 
 	// Choose what to do based on
 	// the value of the 'gameState' variable
@@ -182,29 +223,13 @@ void loop() {
                 gameState = GameState::EndScreen;
             } else {
                 if(a.pressed(UP_BUTTON)) { // If we're holding the up button
-                    a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-                    int i = 5; // counter variable - only execute a number change every "i" frames
-                    do {
-                        a.delayShort(30); // wait for delay - this slows down the repetition
-                        i = i - 1; // increment loop
-                    }
-                    while (i > 0); // continue loop while i > 0
-                    if ((guessednumber + 1) < randomlimit) {
-                        guessednumber = guessednumber + 1;
-                        sound.tone(NOTE_E2,80);
-                    } else {
-                        return; // do nothing?
-                    }
+                    
                 }
 
-                if (a.pressed(DOWN_BUTTON)) { // Guessed number lower
+
+
+                if (buttonState & UP_BUTTON) { // Guessed number lower
                     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-                    int i = 5; // counter variable - only execute a number change every "i" frames
-                    do {
-                        a.delayShort(30); // wait for delay - this slows down the repetition
-                        i = i - 1; // increment loop
-                    }
-                    while (i > 0); // continue loop while i > 0
                     if ((guessednumber - 1) > 0) {
                         guessednumber = guessednumber - 1;
                         sound.tone(NOTE_E2,80);
