@@ -9,7 +9,7 @@
 // 15 August 2023 (Original)
 // 17 August 2023 (Major Refactor)
 // 20 August 2023 (Public Release - 1.0.0)
-// Nathan Chapman -- @nchpm
+// Nathan Chapman -- @nchpmn
 
 // Library Setup
 #include <Arduboy2.h>
