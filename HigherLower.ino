@@ -1,8 +1,14 @@
-// TUTORIAL: HIGHER LOWER GAME
+// HIGHERLOWER
+// A game of logic, to guess the random number using only two clues: HIGHER or LOWER!
+//
+// This started life as the tutorial by @Crait
 // https://community.arduboy.com/t/7928
+//
+// Code & Graphics licenced under GNU GPL 3.0
 //
 // 15 August 2023 (Original)
 // 17 August 2023 (Major Refactor)
+// 20 August 2023 (Public Release - 1.0.0)
 // Nathan Chapman -- @nchpmn
 
 // Library Setup
