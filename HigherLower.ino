@@ -175,26 +175,35 @@ void loop() {
                 // Transition the game into the 'player lost' state
                 gameState = GameState::EndScreen;
             } else {
-                // Player has more attempts
-                if (a.justPressed(UP_BUTTON)) { // Guessed number higer
+                if(a.pressed(UP_BUTTON)) { // If we're holding the up button
                     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-                    
+                    int i = 5; // counter variable - only execute a number change every "i" frames
+                    do {
+                        a.delayShort(30); // wait for delay - this slows down the repetition
+                        i = i - 1; // increment loop
+                    }
+                    while (i > 0); // continue loop while i > 0
                     if ((guessednumber + 1) < randomlimit) {
                         guessednumber = guessednumber + 1;
                         sound.tone(NOTE_E2,80);
                     } else {
-                        sound.tone(NOTE_E2,60, NOTE_REST,20, NOTE_E2,60);
+                        return; // do nothing?
                     }
                 }
 
-                if (a.justPressed(DOWN_BUTTON)) { // Guessed number lower
+                if (a.pressed(DOWN_BUTTON)) { // Guessed number lower
                     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-                    
+                    int i = 5; // counter variable - only execute a number change every "i" frames
+                    do {
+                        a.delayShort(30); // wait for delay - this slows down the repetition
+                        i = i - 1; // increment loop
+                    }
+                    while (i > 0); // continue loop while i > 0
                     if ((guessednumber - 1) > 0) {
                         guessednumber = guessednumber - 1;
-                        sound.tone(NOTE_D2,80);
+                        sound.tone(NOTE_E2,80);
                     } else {
-                        sound.tone(NOTE_D2,60, NOTE_REST,20, NOTE_D2,60);
+                        return; // do nothing?
                     }
                 }
 
