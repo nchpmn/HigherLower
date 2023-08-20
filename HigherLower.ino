@@ -120,11 +120,15 @@ void restartGame() {
     // reset game variables
     attempts = 0;
     playerwin = false;
-    guessednumber = 1;
 
     // random another taget number
     randomnumber = random(1,randomlimit); // random() generates lower to upper-1
-    // randomnumber = 0;
+    guessednumber = randomnumber;
+
+    while (guessednumber == randomnumber) {
+        // to ensure starting guessednumber can't be the solution, randomise & check
+        guessednumber = random(1,randomlimit);
+    }
 
     // turn off the LED
     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
