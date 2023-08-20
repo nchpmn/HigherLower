@@ -251,6 +251,10 @@ void loop() {
 
         case GameState::Credits: {  // If 'gameState' is 'GameState::Credits'
             Sprites::drawOverwrite(0, 0, credits, 0);
+
+            a.setCursor(0,50);
+            a.print("v1.0.0");
+
             // Let the player start a new game - reinitialise variables just in case
             if (a.justPressed(A_BUTTON)||a.justPressed(B_BUTTON)) {
                 restartGame();
