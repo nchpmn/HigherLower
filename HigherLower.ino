@@ -193,9 +193,9 @@ void loop() {
                     if (a.everyXFrames(framesDelay)) {
                         if ((guessednumber + 1) < randomlimit) {
                             guessednumber = guessednumber + 1;
-                            sound.tone(NOTE_E2,80);
+                            sound.tone((71+(guessednumber*2)),80);
                         } else {
-                            sound.tone(NOTE_GS2,60, NOTE_REST,60, NOTE_GS2,80);
+                            sound.tone(NOTE_E4,60, NOTE_REST,60, NOTE_E4,80);
                         }
                         
                     }
@@ -205,7 +205,7 @@ void loop() {
                     if (a.everyXFrames(framesDelay)) {
                         if ((guessednumber - 1) > 0) {
                             guessednumber = guessednumber - 1;
-                            sound.tone(NOTE_D2,80);
+                            sound.tone((71+(guessednumber*2)),80);
                         } else {
                             sound.tone(NOTE_A1,60, NOTE_REST,60, NOTE_A1,80);
                         }
