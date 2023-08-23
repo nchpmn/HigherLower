@@ -5,6 +5,8 @@
 // 17 August 2023 (Major Refactor)
 // Nathan Chapman -- @nchpmn
 
+#define VERSION "1.1.1"
+
 // Library Setup
 #include <Arduboy2.h>
 Arduboy2 a;
@@ -19,6 +21,7 @@ int guessednumber;
 int randomlimit;
 int randomnumber;
 int lastguess;
+bool showVersion;
 
 // State Machine Setup
 enum class GameState {
@@ -264,13 +267,18 @@ void loop() {
 
         case GameState::Credits: {  // If 'gameState' is 'GameState::Credits'
             Sprites::drawOverwrite(0, 0, credits, 0);
-
-            a.setCursor(0,50);
-            a.print("v1.0.0");
-
-            // Let the player start a new game - reinitialise variables just in case
+            if (showVersion) {
+                a.setCursor(0,50);
+                a.print(VERSION);
+            }
+            // Let the player start a new game - reinitialise variables and get going!
             if (a.justPressed(A_BUTTON)||a.justPressed(B_BUTTON)) {
                 restartGame();
+            }
+
+            // Toggle showing the version number
+            if (a.justPressed(DOWN_BUTTON)) {
+                showVersion = !showVersion;
             }
         }
         break;
