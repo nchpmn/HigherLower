@@ -181,7 +181,7 @@ void loop() {
                 // Transition the game into the 'player lost' state
                 gameState = GameState::EndScreen;
             } else {
-                int framesDelay = 6;
+                int framesDelay = 6; // Use a variable so we don't have to change it in both functions
                 if(a.pressed(UP_BUTTON)) { // If we're holding the up button
                     if (a.everyXFrames(framesDelay)) {
                         if ((guessednumber + 1) < randomlimit) {
