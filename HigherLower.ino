@@ -188,7 +188,7 @@ void loop() {
                             guessednumber = guessednumber + 1;
                             sound.tone(NOTE_E2,80);
                         } else {
-                            sound.tone(NOTE_A1,60, NOTE_REST,60, NOTE_A1,80);
+                            sound.tone(NOTE_GS2,60, NOTE_REST,60, NOTE_GS2,80);
                         }
                         
                     }
