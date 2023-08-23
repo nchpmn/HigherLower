@@ -109,6 +109,9 @@ void setup() {
     a.initRandomSeed(); // Seeds the random() function - remove this line to produce identical results every time
 
     gameState = GameState::Title;
+    sound.tone(NOTE_C3,200, NOTE_C5,200, NOTE_C6,350);
+
+
     restartGame();
 }
 
