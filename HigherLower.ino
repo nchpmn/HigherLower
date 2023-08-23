@@ -181,8 +181,9 @@ void loop() {
                 // Transition the game into the 'player lost' state
                 gameState = GameState::EndScreen;
             } else {
+                int framesDelay = 6;
                 if(a.pressed(UP_BUTTON)) { // If we're holding the up button
-                    if (a.everyXFrames(6)) {
+                    if (a.everyXFrames(framesDelay)) {
                         if ((guessednumber + 1) < randomlimit) {
                             guessednumber = guessednumber + 1;
                             sound.tone(NOTE_E2,80);
@@ -193,45 +194,24 @@ void loop() {
                     }
                 }
 
-
-
-                if (a.justPressed(DOWN_BUTTON)) { // Guessed number lower
-                    a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-                    if ((guessednumber - 1) > 0) {
-                        guessednumber = guessednumber - 1;
-                        sound.tone(NOTE_D2,80);
-                    } else {
-                        return; // do nothing?
-                    }
-                }
-///////////////////////////////////////////
-/* 
-                if (a.pressed(DOWN_BUTTON)) { // Guessed number lower
-                    a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-                    int i = 5; // counter variable - only execute a number change every "i" frames
-                    do {
-                        a.delayShort(30); // wait for delay - this slows down the repetition
-                        i = i - 1; // increment loop
-                    }
-                    while (i > 0); // continue loop while i > 0
-                    if ((guessednumber - 1) > 0) {
-                        guessednumber = guessednumber - 1;
-                        sound.tone(NOTE_E2,80);
-                    } else {
-                        return; // do nothing?
+                if(a.pressed(DOWN_BUTTON)) { // If we're holding the down button
+                    if (a.everyXFrames(framesDelay)) {
+                        if ((guessednumber - 1) > 0) {
+                            guessednumber = guessednumber - 1;
+                            sound.tone(NOTE_D2,80);
+                        } else {
+                            sound.tone(NOTE_A1,60, NOTE_REST,60, NOTE_A1,80);
+                        }
+                        
                     }
                 }
 
- */
-
-
-//////////////////////////////////////////////////////////////////////////////////////
                 if (a.justPressed(A_BUTTON)) { // Submit guess
                     if (guessednumber == randomnumber) { // Correct guess!
                         // Initiate the 'you win' tune
                         sound.tone(NOTE_D5,300, NOTE_G5,300, NOTE_C6,200);
 
-                        // Transition the game into the 'player lost' state
+                        // Transition the game into the 'player win' state
                         playerwin = true;
                         gameState = GameState::EndScreen;
                         endScreen(playerwin);
