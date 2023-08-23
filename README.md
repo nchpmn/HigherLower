@@ -1,6 +1,8 @@
+# DEVELOPMENT BRANCH ONLY!
+
 ![banner](https://github.com/nchpmn/HigherLower/assets/385808/726e9627-1aaf-4c41-8372-20f5fc100a9d)
 
-**A simple game for the Arduboy. From 1 to 100, guess the number!**
+**A simple game for the Arduboy. A game of logic, to guess the random number using only two clues: HIGHER or LOWER!**
 
 ## Installation
 
