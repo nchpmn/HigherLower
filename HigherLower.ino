@@ -5,7 +5,7 @@
 // 17 August 2023 (Major Refactor)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "1.1.1"
+#define VERSION "1.2.0"
 
 // Library Setup
 #include <Arduboy2.h>
