@@ -11,7 +11,7 @@
 // 20 August 2023 (Public Release - 1.0.0)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "1.2.0"
+#define VERSION "1.2.1"
 
 // Library Setup
 #include <Arduboy2.h>
@@ -271,8 +271,12 @@ void loop() {
                 a.print(VERSION);
             }
             // Let the player start a new game - reinitialise variables and get going!
-            if (a.justPressed(A_BUTTON)||a.justPressed(B_BUTTON)) {
+            if (a.justPressed(A_BUTTON)) {
                 restartGame();
+            }
+
+            if (a.justPressed(B_BUTTON)) {
+                gameState = GameState::Title;
             }
 
             // Toggle showing the version number
