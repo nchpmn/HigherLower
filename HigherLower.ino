@@ -111,6 +111,14 @@ const uint16_t titleSong[] PROGMEM = {
     NOTE_G4,200, NOTE_A3,300, NOTE_D3,300,
     TONES_END };
 
+// Initiate the 'you lose' tune
+const uint16_t loseSong[] PROGMEM = {
+    NOTE_REST,100,
+    NOTE_D4,300, NOTE_B3,300, NOTE_REST,50,
+    NOTE_C3,200, NOTE_G2,200, NOTE_REST,50,
+    NOTE_C2,500,
+    TONES_END };
+
 // Setup code, to run once
 void setup() {
     a.begin();
@@ -194,9 +202,8 @@ void loop() {
 		// If 'gameState' is 'GameState::Playing'
 		case GameState::Playing: { // Ask the player for a number and play the game
             if (attempts == 7) { // Too many guesses - game over!
-
-                // Initiate the 'you lose' tune
-                sound.tone(NOTE_D5,300, NOTE_G4,300, NOTE_C4,200);
+                //Play the "You Lose" Song"
+                sound.tones(loseSong);
 
                 // Transition the game into the 'player lost' state
                 gameState = GameState::EndScreen;
