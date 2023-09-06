@@ -100,15 +100,28 @@ const uint8_t PROGMEM credits[] = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 };
 
+const uint16_t titleSong[] PROGMEM = {
+    NOTE_REST,500,
+    NOTE_FS2,250, NOTE_G2,150,
+    NOTE_C3,75, NOTE_D3,75, NOTE_E3,75, NOTE_FS3,75,
+    NOTE_GS3,75, NOTE_AS3,75, NOTE_C4,75, NOTE_D4,75,
+    NOTE_E4,75, NOTE_FS4,75, NOTE_GS4,75, NOTE_AS4,75,
+    NOTE_C5,75, NOTE_D5,75, NOTE_E5,75, NOTE_FS5,150,
+    NOTE_REST,200,
+    NOTE_G4,200, NOTE_A3,300, NOTE_D3,300,
+    TONES_END };
+
 // Setup code, to run once
 void setup() {
     a.begin();
+    a.audio.on();
     a.setFrameRate(60);
 
     randomlimit = 101; // Upper limit of guessable numbers (+1 to account for random())
     a.initRandomSeed(); // Seeds the random() function - remove this line to produce identical results every time
 
     gameState = GameState::Title;
+    sound.tones(titleSong);
     restartGame();
 }
 
@@ -193,9 +206,9 @@ void loop() {
                     if (a.everyXFrames(framesDelay)) {
                         if ((guessednumber + 1) < randomlimit) {
                             guessednumber = guessednumber + 1;
-                            sound.tone(NOTE_E2,80);
+                            sound.tone((71+(guessednumber*2)),80);
                         } else {
-                            sound.tone(NOTE_GS2,60, NOTE_REST,60, NOTE_GS2,80);
+                            sound.tone(NOTE_E4,60, NOTE_REST,60, NOTE_E4,80);
                         }
                         
                     }
@@ -205,7 +218,7 @@ void loop() {
                     if (a.everyXFrames(framesDelay)) {
                         if ((guessednumber - 1) > 0) {
                             guessednumber = guessednumber - 1;
-                            sound.tone(NOTE_D2,80);
+                            sound.tone((71+(guessednumber*2)),80);
                         } else {
                             sound.tone(NOTE_A1,60, NOTE_REST,60, NOTE_A1,80);
                         }
