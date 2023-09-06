@@ -23,7 +23,8 @@ Arduboy2 a;
 ArduboyTones sound(a.audio.enabled);
 
 // Include Custom Modules
-#include "graphics.h" // honestly right now this is just here for testing
+#include "graphics.h"
+#include "music.h"
 
 // State Machine Setup
 enum class GameState {
@@ -59,12 +60,17 @@ void loop() {
         case GameState::Title: {
             Sprites::drawOverwrite(0, 0, title, 0);
 
-            if (a.justPressed(B_BUTTON)) {
-                gameState = GameState::Credits;
+            static bool titleSongFlag = false;
+            if (!titleSongFlag) {
+                sound.tones(titleSong);
+                titleSongFlag = true;
             }
-
+            
             if (a.justPressed(A_BUTTON)) {
                 gameState == GameState::ModeSelect;
+            }
+            if (a.justPressed(B_BUTTON)) {
+                gameState = GameState::Credits;
             }
         }
         break;
