@@ -26,7 +26,7 @@ ArduboyTones sound(a.audio.enabled);
 #include "graphics.h"
 #include "music.h"
 
-// State Machine Setup
+// Global State Machine Setup
 enum class GameState {
     Title,
     Credits,
@@ -37,12 +37,20 @@ enum class GameState {
 };
 GameState gameState = GameState::Title;
 
+// GameSetup State Machine
+enum class SetupState {
+    Reset,
+    PickNumber
+};
+SetupState setupState = SetupState::Reset;
+
 // Global Variable Setup
 bool modeSingle = true;
 int attempts = 0;
 bool playerWin = false;
 int targetNumb = 0;
 int gussedNumb = 0;
+int randomLimit = 101;
 
 
 // Setup - Run once at the beginning of the program
@@ -50,6 +58,42 @@ void setup() {
     a.begin();
     a.setFrameRate(60);
     a.initRandomSeed();
+}
+
+// Let the user pick numbers, scrolling around
+void pickNumber(int& pickedNumb, bool silent, Arduboy2& a, ArduboyTones& sound) {
+    int framesDelay = 6; // Set the speed of held-button changing
+
+    // Press or hold UP
+    if (a.pressed(UP_BUTTON)) {
+        if (a.everyXFrames(framesDelay)) {
+            if ((pickedNumb + 1) < randomLimit) {
+                // If pickedNumb+1 still in limits
+                pickedNumb++;
+                if (!silent) {
+                    sound.tone((71+(pickedNumb*2)),80);
+                }
+            } else {
+                // If pickedNumb+1 too large
+                sound.tone(NOTE_E4,60, NOTE_REST,60, NOTE_E4,80);
+            }
+        }
+    }
+    // Press or hold DOWN
+    if (a.pressed(DOWN_BUTTON)) {
+        if (a.everyXFrames(framesDelay)) {
+            if ((pickedNumb - 1) > 0) {
+                // If pickedNumb+1 still in limits
+                pickedNumb--;
+                if (!silent) {
+                    sound.tone((71+(pickedNumb*2)),80);
+                }
+            } else {
+                // If pickedNumb-1 too small
+                sound.tone(NOTE_A1,60, NOTE_REST,60, NOTE_A1,80);
+            }
+        }
+    }
 }
 
 // Main Loop - Run continuously forever and ever and ever and ever
@@ -136,24 +180,41 @@ void loop() {
             // Also reset all the variables
             // The game returns to here after each round
 
-            // Reset Game Variables
-            attempts = 0;
-            playerWin = false;
-            a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-            targetNumb = random(1,101); // random() generates high-1
+            switch(setupState) {
+                // Game Setup code to run once only
+                case SetupState::Reset: {
+                    // Reset Game Variables
+                    attempts = 0;
+                    playerWin = false;
+                    a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
+                    targetNumb = random(1,randomLimit); // random() generates high-1
+                    gussedNumb = random(1,randomLimit);
 
+                    // Move on to PickNumber state immediately
+                    setupState = SetupState::PickNumber;
+                }
+                break;
 
-            // Target Number Setup
-            if (!modeSingle) {
                 // Additional 2-Player Setup
-                Sprites::drawOverwrite(0, 0, targetHeader, 0);
-                a.setTextSize(2);
-                a.setCursor(10,45);
-                a.print(targetNumb);
-            }
+                case SetupState::PickNumber: {
+                    // Additional 2-Player Setup
+                    if (!modeSingle) {
+                        Sprites::drawOverwrite(0, 0, targetHeader, 0);
+                        a.setTextSize(2);
+                        a.setCursor(10,45);
+                        a.print(targetNumb);
 
-            // Starting Guess Number
-            gussedNumb = random(1,101);
+                        pickNumber(targetNumb, true, a, sound);
+                        if (a.justPressed(A_BUTTON)) {
+                            gameState = GameState::Playing;
+                        }
+                    } else {
+                        // Single-Player Game
+                        gameState = GameState::Playing;
+                    }
+                }
+                break;
+            }
         }
         break;
 
