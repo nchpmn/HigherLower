@@ -263,8 +263,8 @@ void loop() {
                 Sprites::drawOverwrite(0, 0, playHeader, 0);
 
                 a.setCursor(0,30);
-                a.print("     Attempt: ");
-                a.print(attempts);
+                a.print("     Attempts: ");
+                a.print(7- attempts);
                 a.print("\n Number to Guess: ");
                 a.print(guessednumber);
 
