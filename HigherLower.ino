@@ -200,11 +200,20 @@ void loop() {
                     // Additional 2-Player Setup
                     if (!modeSingle) {
                         Sprites::drawOverwrite(0, 0, targetHeader, 0);
+                        
+                        // This is all to center the targetNumb
+                        static int y = 32;
+                        if (targetNumb < 10) {
+                            a.setCursor(61,y);
+                        } else if (targetNumb < 100) {
+                            a.setCursor(53,y);
+                        } else {
+                            a.setCursor(45,y);
+                        }
                         a.setTextSize(2);
-                        a.setCursor(10,45);
                         a.print(targetNumb);
 
-                        pickNumber(targetNumb, true, a, sound);
+                        pickNumber(targetNumb, randomLimit, true, a, sound);
                         if (a.justPressed(A_BUTTON)) {
                             gameState = GameState::Playing;
                         }
