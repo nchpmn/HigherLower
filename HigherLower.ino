@@ -14,3 +14,27 @@
 // Nathan Chapman -- @nchpmn
 
 #define VERSION "v2.0.0-prealpha"
+
+// ARDUBOY LIBRARY SETUP
+#include <Arduboy2.h>
+Arduboy2 a;
+#include <ArduboyTones.h>
+#include <ArduboyTonesPitches.h>
+ArduboyTones sound(a.audio.enabled);
+
+// INCLUDE MODULES
+#include "graphics.h" // honestly right now this is just here for testing
+
+void setup() {
+    a.begin();
+    a.setFrameRate(60);
+    a.initRandomSeed();
+}
+
+void loop() {
+    a.clear();
+
+    Sprites::drawOverwrite(0, 0, title, 0);
+
+    a.display();
+}
