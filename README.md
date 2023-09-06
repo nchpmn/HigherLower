@@ -10,6 +10,13 @@ Grab the `.hex` from Releases (eventually). You can use some [Python Utilities](
 
 Please raise issues for bugs or feature requests.
 
+## Roadmap
+
+I have two significant features I would like implemented in the future:
+
+1. Added difficulty levels (see [#10](https://github.com/nchpmn/HigherLower/issues/10) for discussion)
+2. 2-player game mode (see [#12](https://github.com/nchpmn/HigherLower/issues/12))
+
 ## License
 
 The code for this game was originally supplied as part of a tutorial series by [Crait](http://github.com/crait) over on the [Arduboy Forum](https://community.arduboy.com/t/make-your-own-arduboy-game-part-5-your-first-game/7928). With great thanks to them for giving permission to distrubute this "improved"[^1] version of the game.
