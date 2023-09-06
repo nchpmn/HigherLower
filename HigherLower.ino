@@ -15,26 +15,85 @@
 
 #define VERSION "v2.0.0-prealpha"
 
-// ARDUBOY LIBRARY SETUP
+// Arduboy Library Setup
 #include <Arduboy2.h>
 Arduboy2 a;
 #include <ArduboyTones.h>
 #include <ArduboyTonesPitches.h>
 ArduboyTones sound(a.audio.enabled);
 
-// INCLUDE MODULES
+// Include Custom Modules
 #include "graphics.h" // honestly right now this is just here for testing
 
+// State Machine Setup
+enum class GameState {
+    Title,
+    Credits,
+    ModeSelect,
+    GameSetup,
+    Playing,
+    EndScreen
+};
+GameState currentState = GameState::Title;
+
+// Setup - Run once at the beginning of the program
 void setup() {
     a.begin();
     a.setFrameRate(60);
     a.initRandomSeed();
 }
 
+// Main Loop - Run continuously forever and ever and ever and ever
 void loop() {
+    // If it's not time to draw the next frame
+    if (!a.nextFrame())
+        // Exit the loop() early - i.e. wait for next frame time
+        return;
+    
     a.clear();
+    a.pollButtons();
 
-    Sprites::drawOverwrite(0, 0, title, 0);
+    // Choose what to do based on the 'gameState' variable
+    switch(currentState) {
+        // Title Screen
+        case GameState::Title: {
+            Sprites::drawOverwrite(0, 0, title, 0);
+        }
+        break;
 
+        // Credits
+        case GameState::Credits: {
+            // Credits here
+        }
+        break;
+
+        // Mode Select - 1P or 2P
+        case GameState::ModeSelect: {
+            // Mode Select
+        }
+        break;
+        
+        // Game Setup
+        case GameState::GameSetup: {
+            // Game Setup - ask for target number or randomly generate
+            // Also reset all the variables
+            // The game returns to here after each round
+        }
+        break;
+
+        // Main Game
+        case GameState::Playing: {
+            // Main Game... Lots Here...
+        }
+        break;
+
+        // End Screen
+        case GameState::EndScreen: {
+            // End screen - win or lose message
+        }
+        break;
+    }
+
+    // Update the screen
     a.display();
 }
