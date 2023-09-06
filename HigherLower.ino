@@ -62,6 +62,10 @@ void loop() {
             if (a.justPressed(B_BUTTON)) {
                 gameState = GameState::Credits;
             }
+
+            if (a.justPressed(A_BUTTON)) {
+                gameState == GameState::ModeSelect;
+            }
         }
         break;
 
