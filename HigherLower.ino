@@ -11,7 +11,7 @@
 // 20 August 2023 (Public Release - 1.0.0)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "1.2.2"
+#define VERSION "v1.2.2"
 
 // Library Setup
 #include <Arduboy2.h>
@@ -303,3 +303,5 @@ void loop() {
 	// Update the screen
 	a.display();
 }
+
+// Hi Mum!
