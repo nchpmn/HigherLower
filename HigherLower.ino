@@ -39,6 +39,11 @@ GameState gameState = GameState::Title;
 
 // Global Variable Setup
 bool modeSingle = true;
+int attempts = 0;
+bool playerWin = false;
+int targetNumb = 0;
+int gussedNumb = 0;
+
 
 // Setup - Run once at the beginning of the program
 void setup() {
@@ -118,6 +123,10 @@ void loop() {
                 modeSingle = false;
                 sound.tone(NOTE_B1,60);
             }
+            
+            if (a.justPressed(A_BUTTON)) {
+                gameState = GameState::GameSetup;
+            }
         }
         break;
         
@@ -126,6 +135,25 @@ void loop() {
             // Game Setup - ask for target number or randomly generate
             // Also reset all the variables
             // The game returns to here after each round
+
+            // Reset Game Variables
+            attempts = 0;
+            playerWin = false;
+            a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
+            targetNumb = random(1,101); // random() generates high-1
+
+
+            // Target Number Setup
+            if (!modeSingle) {
+                // Additional 2-Player Setup
+                Sprites::drawOverwrite(0, 0, targetHeader, 0);
+                a.setTextSize(2);
+                a.setCursor(10,45);
+                a.print(targetNumb);
+            }
+
+            // Starting Guess Number
+            gussedNumb = random(1,101);
         }
         break;
 
