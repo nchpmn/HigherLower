@@ -1,6 +1,7 @@
 #include "GameUtils.h"
 
 // Let the user pick numbers, scrolling around
+// Used in ::GameSetup and ::Playing
 void pickNumber(int& pickedNumb, int& randomLimit, bool silent, Arduboy2& a, ArduboyTones& sound) {
     int framesDelay = 6; // Set the speed of held-button changing
 
