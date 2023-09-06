@@ -13,7 +13,7 @@
 // 07 September 2023 (Begin v2.0.0 Rewrite)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "v2.0.0-prealpha"
+#define VERSION "v2-prealpha-230907"
 
 // Arduboy Library Setup
 #include <Arduboy2.h>
@@ -34,7 +34,7 @@ enum class GameState {
     Playing,
     EndScreen
 };
-GameState currentState = GameState::Title;
+GameState gameState = GameState::Title;
 
 // Setup - Run once at the beginning of the program
 void setup() {
@@ -54,16 +54,35 @@ void loop() {
     a.pollButtons();
 
     // Choose what to do based on the 'gameState' variable
-    switch(currentState) {
+    switch(gameState) {
         // Title Screen
         case GameState::Title: {
             Sprites::drawOverwrite(0, 0, title, 0);
+
+            if (a.justPressed(B_BUTTON)) {
+                gameState = GameState::Credits;
+            }
         }
         break;
 
         // Credits
         case GameState::Credits: {
-            // Credits here
+            Sprites::drawOverwrite(0, 0, credits, 0);
+
+            // Return to title screen
+            if (a.justPressed(B_BUTTON|A_BUTTON)) {
+                gameState = GameState::Title;
+            }
+
+            // Toggle showing version number
+            static bool showVersion = false;
+            if (showVersion) {
+                a.setCursor(0,50);
+                a.print(VERSION);
+            }
+            if (a.justPressed(DOWN_BUTTON)) {
+                showVersion = !showVersion;
+            }
         }
         break;
 
