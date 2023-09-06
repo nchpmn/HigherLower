@@ -37,6 +37,9 @@ enum class GameState {
 };
 GameState gameState = GameState::Title;
 
+// Global Variable Setup
+bool modeSingle = true;
+
 // Setup - Run once at the beginning of the program
 void setup() {
     a.begin();
@@ -67,7 +70,7 @@ void loop() {
             }
             
             if (a.justPressed(A_BUTTON)) {
-                gameState == GameState::ModeSelect;
+                gameState = GameState::ModeSelect;
             }
             if (a.justPressed(B_BUTTON)) {
                 gameState = GameState::Credits;
@@ -98,7 +101,23 @@ void loop() {
 
         // Mode Select - 1P or 2P
         case GameState::ModeSelect: {
-            // Mode Select
+            Sprites::drawOverwrite(0, 0, modeselect, 0);
+            if (modeSingle) {
+                // Single-player currently selected
+                a.fillRect(10, 55, 41, 2, BLACK);
+            } else {
+                // 2-Player selected
+                a.fillRect(71, 55, 47, 2, WHITE);
+            }
+
+            if (a.justPressed(LEFT_BUTTON)) {
+                modeSingle = true;
+                sound.tone(NOTE_A1,60);
+            }
+            if (a.justPressed(RIGHT_BUTTON)) {
+                modeSingle = false;
+                sound.tone(NOTE_B1,60);
+            }
         }
         break;
         
