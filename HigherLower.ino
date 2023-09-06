@@ -11,7 +11,7 @@
 // 20 August 2023 (Public Release - 1.0.0)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "v1.2.2"
+#define VERSION "v1.3.0"
 
 // Library Setup
 #include <Arduboy2.h>
