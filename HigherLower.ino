@@ -119,6 +119,14 @@ const uint16_t loseSong[] PROGMEM = {
     NOTE_C2,500,
     TONES_END };
 
+// Initiate the 'you win' tune
+const uint16_t winSong[] PROGMEM = {
+    NOTE_REST,100,
+    NOTE_B4,200, NOTE_REST,50, NOTE_D5,200, NOTE_REST,50,
+    NOTE_G5,100, NOTE_B5,100, NOTE_REST,50,
+    NOTE_C6,300, 
+    TONES_END };
+
 // Setup code, to run once
 void setup() {
     a.begin();
@@ -235,8 +243,8 @@ void loop() {
 
                 if (a.justPressed(A_BUTTON)) { // Submit guess
                     if (guessednumber == randomnumber) { // Correct guess!
-                        // Initiate the 'you win' tune
-                        sound.tone(NOTE_D5,300, NOTE_G5,300, NOTE_C6,200);
+                        // Play the 'you win' tune
+                        sound.tones(winSong);
 
                         // Transition the game into the 'player win' state
                         playerwin = true;
