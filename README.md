@@ -17,3 +17,5 @@ The code for this game was originally supplied as part of a tutorial series by [
 Code and Graphics are Copyright @nchpmn
 
 This program is freely licenced under [GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0-standalone.html).
+
+[^1]: I make no guarantees this program is better, more fun, or in any way improved compared to the tutorial code. It's simply more complicated and with more spit & polish.
