@@ -191,6 +191,11 @@ void loop() {
         case GameState::EndScreen: {
             a.setCursor(0,0);
             a.print("EndScreen");
+            if (playerWin) {
+                a.print("\nWin");
+            } else {
+                a.print("\nLose");
+            }
         }
         break;
     }
