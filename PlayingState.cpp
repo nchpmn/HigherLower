@@ -1,26 +1,12 @@
 #include "PlayingState.h"
 #include "GameUtils.h"  // Include the GameUtils header
+#include "graphics.h"
 
-PlayingState::PlayingState(Arduboy2 &arduboy) : arduboy(arduboy) {
-    // Constructor implementation (if needed)
+// Constructor
+PlayingState::PlayingState(Arduboy2& arduboy) : a(arduboy) {
+    int attempts = 0;
 }
 
-void PlayingState::init() {
-    // Initialization code for PlayingState
-}
-
-void PlayingState::update() {
-    // Update code for PlayingState
-}
-
-void PlayingState::draw() {
-    // Drawing code for PlayingState
-    arduboy.clear();
-    // Call pickNumber function in PlayingState.cpp
-    int targetNumber = 0;
-    bool isTwoPlayer = true;  // Example, change as needed
-    // pickNumber(targetNumber, isTwoPlayer, arduboy, arduboy.tunes());
-
-    // Draw game elements here
-    arduboy.display();
+void PlayingState::guess() {
+    Sprites::drawOverwrite(0, 0, playHeader, 0);
 }

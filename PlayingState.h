@@ -1,21 +1,21 @@
-#ifndef PLAYINGSTATE_H
-#define PLAYINGSTATE_H
+#ifndef PLAYING_STATE_H
+#define PLAYING_STATE_H
 
-#include <Arduboy2.h>
-#include <ArduboyTones.h>
+// Include Arduboy Libraries
+#include "Arduboy2.h"
+#include "ArduboyTones.h"
 
 class PlayingState {
 public:
-    PlayingState(Arduboy2 &arduboy);
+    PlayingState(Arduboy2& arduboy);  // Constructor
 
-    // Add any public member functions you need for PlayingState
-    void init();
-    void update();
-    void draw();
+    void guess();
 
 private:
-    // Add any private member functions or variables needed for PlayingState
-    Arduboy2 &arduboy;
+    // You can declare an Arduboy2 object as "a" here
+    Arduboy2& a;
+    
+    // Other member variables and functions specific to PlayingState
 };
 
-#endif // PLAYINGSTATE_H
+#endif

@@ -27,7 +27,7 @@ ArduboyTones sound(a.audio.enabled);
 #include "graphics.h" // Bitmap arrays
 #include "music.h" // Tones and beeps
 #include "PlayingState.h" // GameState::Playing split into its own file
-PlayingState playing(a);
+PlayingState playingState(a);
 
 // Global State Machine Setup
 enum class GameState {
@@ -117,7 +117,7 @@ void loop() {
 
         // Mode Select - 1P or 2P
         case GameState::ModeSelect: {
-            Sprites::drawOverwrite(0, 0, modeselect, 0);
+            Sprites::drawOverwrite(0, 0, modeSelect, 0);
             if (modeSingle) {
                 // Single-player currently selected
                 a.fillRect(10, 55, 41, 2, BLACK);
@@ -196,7 +196,7 @@ void loop() {
 
         // Main Game
         case GameState::Playing: {
-            // Main Game... Lots Here...
+            playingState.guess();
         }
         break;
 
