@@ -18,7 +18,6 @@
 Arduboy2 a;
 #include <ArduboyTones.h>
 #include <ArduboyTonesPitches.h>
-ArduboyTones sound(a.audio.enabled);
 
 // Variable Setup
 bool playerwin;
