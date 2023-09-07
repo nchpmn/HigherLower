@@ -9,6 +9,7 @@
 // Declare global variables being used inside of this class
 extern bool playerWin;
 extern int targetNumb;
+extern int guessedNumb;
 extern int randomLimit;
 extern GameState gameState;
 
@@ -27,7 +28,6 @@ private:
     
     // Other member variables and functions specific to PlayingState
     int attempts = 0;
-    int guessedNumb = random(1, randomLimit);
     int lastGuess = 0;
 };
 

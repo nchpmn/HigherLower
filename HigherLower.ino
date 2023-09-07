@@ -42,6 +42,7 @@ SetupState setupState = SetupState::Reset;
 bool modeSingle = true;
 bool playerWin = false;
 int targetNumb = 0;
+int guessedNumb = 0;
 int randomLimit = 101;
 
 
@@ -143,6 +144,7 @@ void loop() {
                     playerWin = false;
                     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
                     targetNumb = random(1,randomLimit); // random() generates high-1
+                    guessedNumb = random(1,randomLimit);
 
                     // Move on to PickNumber state immediately
                     setupState = SetupState::PickNumber;
