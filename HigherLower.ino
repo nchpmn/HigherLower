@@ -141,10 +141,7 @@ void loop() {
                 // Game Setup code to run once only
                 case SetupState::Reset: {
                     // Reset Game Variables
-                    playerWin = false;
                     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-                    targetNumb = random(1,randomLimit); // random() generates high-1
-                    guessedNumb = random(1,randomLimit);
 
                     playingState.reset();
 
@@ -204,6 +201,7 @@ void loop() {
             }
 
             if (a.justPressed(A_BUTTON)) {
+                setupState = SetupState::Reset; // Reset the setup state machine
                 gameState = GameState::ModeSelect;
             }
         }
