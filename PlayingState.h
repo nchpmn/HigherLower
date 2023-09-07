@@ -18,6 +18,8 @@ public:
     // Constructor
     PlayingState(Arduboy2& arduboy, ArduboyTones& tones);
 
+    void reset();
+    
     void guess();
 
 private:

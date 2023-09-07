@@ -9,6 +9,14 @@ PlayingState::PlayingState(Arduboy2& arduboy, ArduboyTones& tones) : a(arduboy),
 
 }
 
+void PlayingState::reset() {
+    attempts = 0;
+    lastGuess = 0;
+    targetNumb = random(1,randomLimit); // random() generates high-1
+    guessedNumb = random(1,randomLimit);
+    playerWin = false;
+}
+
 void PlayingState::guess() {
     Sprites::drawOverwrite(0, 0, playHeader, 0);
     

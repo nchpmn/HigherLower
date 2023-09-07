@@ -146,6 +146,8 @@ void loop() {
                     targetNumb = random(1,randomLimit); // random() generates high-1
                     guessedNumb = random(1,randomLimit);
 
+                    playingState.reset();
+
                     // Move on to PickNumber state immediately
                     setupState = SetupState::PickNumber;
                 }
