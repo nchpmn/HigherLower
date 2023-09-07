@@ -1,11 +1,12 @@
 #include "playingState.h"
 #include "gameUtils.h"  // Include the GameUtils header
 #include "graphics.h"
+#include "music.h"
 #include "gameState.h"
 
 // Constructor
 PlayingState::PlayingState(Arduboy2& arduboy, ArduboyTones& tones) : a(arduboy), sound(tones) {
-    
+
 }
 
 void PlayingState::guess() {
@@ -49,8 +50,7 @@ void PlayingState::guess() {
     if (a.justPressed(A_BUTTON)) {
         if (guessedNumb == targetNumb) {
             // Play the 'you win' tune
-            // sound.tones(winSong); Come back to this - requires to create
-            // music.cpp and fix declare/define in music.h
+            sound.tones(winSong);
 
             // Transition the game into the 'player win' state
             playerWin = true;
@@ -60,7 +60,7 @@ void PlayingState::guess() {
             attempts++;
             if (attempts == 7) {
                 // Play the "you lose" tune
-                // sound.tones(loseSong);
+                sound.tones(loseSong);
 
                 // Transition to 'player lose' state
                 gameState = GameState::EndScreen;
