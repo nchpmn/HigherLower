@@ -23,22 +23,13 @@ Arduboy2 a;
 ArduboyTones sound(a.audio.enabled);
 
 // Include Custom Modules
-#include "GameUtils.h"  // Custom functions available everywhere
+#include "gameUtils.h"  // Custom functions available everywhere
 #include "graphics.h" // Bitmap arrays
 #include "music.h" // Tones and beeps
-#include "PlayingState.h" // GameState::Playing split into its own file
-PlayingState playingState(a);
-
-// Global State Machine Setup
-enum class GameState {
-    Title,
-    Credits,
-    ModeSelect,
-    GameSetup,
-    Playing,
-    EndScreen
-};
+#include "gameState.h" // Global State Machine Class
 GameState gameState = GameState::Title;
+#include "playingState.h" // GameState::Playing split into its own file
+PlayingState playingState(a, sound);
 
 // GameSetup State Machine
 enum class SetupState {
@@ -49,10 +40,8 @@ SetupState setupState = SetupState::Reset;
 
 // Global Variable Setup
 bool modeSingle = true;
-int attempts = 0;
 bool playerWin = false;
 int targetNumb = 0;
-int gussedNumb = 0;
 int randomLimit = 101;
 
 
@@ -151,11 +140,9 @@ void loop() {
                 // Game Setup code to run once only
                 case SetupState::Reset: {
                     // Reset Game Variables
-                    attempts = 0;
                     playerWin = false;
                     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
                     targetNumb = random(1,randomLimit); // random() generates high-1
-                    gussedNumb = random(1,randomLimit);
 
                     // Move on to PickNumber state immediately
                     setupState = SetupState::PickNumber;
@@ -202,7 +189,8 @@ void loop() {
 
         // End Screen
         case GameState::EndScreen: {
-            // End screen - win or lose message
+            a.setCursor(0,0);
+            a.print("EndScreen");
         }
         break;
     }
