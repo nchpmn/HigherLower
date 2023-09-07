@@ -10,6 +10,10 @@ PlayingState::PlayingState(Arduboy2& arduboy, ArduboyTones& tones) : a(arduboy),
 }
 
 void PlayingState::reset() {
+    // Turn off LED
+    a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
+
+    // Reset variables to starting state
     attempts = 0;
     lastGuess = 0;
     targetNumb = random(1,randomLimit); // random() generates high-1

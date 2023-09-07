@@ -31,13 +31,6 @@ GameState gameState = GameState::Title;
 #include "playingState.h" // GameState::Playing split into its own file
 PlayingState playingState(a, sound);
 
-// GameSetup State Machine
-enum class SetupState {
-    Reset,
-    PickNumber
-};
-SetupState setupState = SetupState::Reset;
-
 // Global Variable Setup
 bool modeSingle = true;
 bool playerWin = false;
@@ -126,6 +119,7 @@ void loop() {
             }
             
             if (a.justPressed(A_BUTTON)) {
+                playingState.reset(); // Reset Game variables for new game
                 gameState = GameState::GameSetup;
             }
         }
@@ -134,50 +128,29 @@ void loop() {
         // Game Setup
         case GameState::GameSetup: {
             // Game Setup - ask for target number or randomly generate
-            // Also reset all the variables
-            // The game returns to here after each round
+            // Additional 2-Player Setup
+            if (!modeSingle) {
+                Sprites::drawOverwrite(0, 0, targetHeader, 0);
 
-            switch(setupState) {
-                // Game Setup code to run once only
-                case SetupState::Reset: {
-                    // Reset Game Variables
-                    a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
-
-                    playingState.reset();
-
-                    // Move on to PickNumber state immediately
-                    setupState = SetupState::PickNumber;
+                // This is all to center the targetNumb
+                static int y = 32;
+                if (targetNumb < 10) {
+                    a.setCursor(61,y);
+                } else if (targetNumb < 100) {
+                    a.setCursor(53,y);
+                } else {
+                    a.setCursor(45,y);
                 }
-                break;
+                a.setTextSize(2);
+                a.print(targetNumb);
 
-                // Additional 2-Player Setup
-                case SetupState::PickNumber: {
-                    // Additional 2-Player Setup
-                    if (!modeSingle) {
-                        Sprites::drawOverwrite(0, 0, targetHeader, 0);
-
-                        // This is all to center the targetNumb
-                        static int y = 32;
-                        if (targetNumb < 10) {
-                            a.setCursor(61,y);
-                        } else if (targetNumb < 100) {
-                            a.setCursor(53,y);
-                        } else {
-                            a.setCursor(45,y);
-                        }
-                        a.setTextSize(2);
-                        a.print(targetNumb);
-
-                        pickNumber(targetNumb, randomLimit, true, a, sound);
-                        if (a.justPressed(A_BUTTON)) {
-                            gameState = GameState::Playing;
-                        }
-                    } else {
-                        // Single-Player Game
-                        gameState = GameState::Playing;
-                    }
+                pickNumber(targetNumb, randomLimit, true, a, sound);
+                if (a.justPressed(A_BUTTON)) {
+                    gameState = GameState::Playing;
                 }
-                break;
+            } else {
+                // Single-Player Game
+                gameState = GameState::Playing;
             }
         }
         break;
@@ -201,7 +174,6 @@ void loop() {
             }
 
             if (a.justPressed(A_BUTTON)) {
-                setupState = SetupState::Reset; // Reset the setup state machine
                 gameState = GameState::ModeSelect;
             }
         }
