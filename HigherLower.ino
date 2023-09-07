@@ -191,12 +191,18 @@ void loop() {
 
         // End Screen
         case GameState::EndScreen: {
-            a.setCursor(0,0);
-            a.print("EndScreen");
             if (playerWin) {
-                a.print("\nWin");
+                // Write our win grapic to screen at position x0 y0
+                Sprites::drawOverwrite(0, 0, win, 0);
+                a.digitalWriteRGB(RGB_OFF,RGB_ON,RGB_OFF);
             } else {
-                a.print("\nLose");
+                // Write our win grapic (array) to screen at position x0 y0
+                Sprites::drawOverwrite(0, 0, lose, 0);
+                a.digitalWriteRGB(RGB_ON,RGB_OFF,RGB_OFF);
+            }
+
+            if (a.justPressed(A_BUTTON)) {
+                gameState = GameState::ModeSelect;
             }
         }
         break;
