@@ -13,7 +13,7 @@
 // 07 September 2023 (Begin v2.0.0 Rewrite)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "v2-prealpha-230907"
+#define VERSION "v2-dev-230907"
 
 // Arduboy Library Setup
 #include <Arduboy2.h>
@@ -167,7 +167,7 @@ void loop() {
                     // Additional 2-Player Setup
                     if (!modeSingle) {
                         Sprites::drawOverwrite(0, 0, targetHeader, 0);
-                        
+
                         // This is all to center the targetNumb
                         static int y = 32;
                         if (targetNumb < 10) {
