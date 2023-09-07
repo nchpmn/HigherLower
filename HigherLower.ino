@@ -130,7 +130,6 @@ const uint16_t winSong[] PROGMEM = {
 // Setup code, to run once
 void setup() {
     a.begin();
-    a.audio.on();
     a.setFrameRate(60);
 
     randomlimit = 101; // Upper limit of guessable numbers (+1 to account for random())
