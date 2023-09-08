@@ -9,6 +9,7 @@ enum class GameState {
     Credits,
     ModeSelect,
     GameSetup,
+    LevelScreen,
     Playing,
     EndScreen
 };

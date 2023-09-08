@@ -10,6 +10,8 @@ extern const uint8_t PROGMEM modeSelect[];
 extern const uint8_t PROGMEM playHeader[];
 extern const uint8_t PROGMEM targetHeader[];
 extern const uint8_t PROGMEM playP2Header[];
+extern const uint8_t PROGMEM levelBG[];
+extern const uint8_t PROGMEM levelNumbs[];
 extern const uint8_t PROGMEM win[];
 extern const uint8_t PROGMEM lose[];
 

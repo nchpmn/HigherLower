@@ -37,6 +37,7 @@ bool playerWin = false;
 int targetNumb = 0;
 int guessedNumb = 0;
 int randomLimit = 101;
+int level = 1;
 
 
 // Setup - Run once at the beginning of the program
@@ -148,10 +149,25 @@ void loop() {
                 pickNumber(targetNumb, randomLimit, true, a, sound);
                 if (a.justPressed(A_BUTTON)) {
                     a.invert(false);
-                    gameState = GameState::Playing;
+                    gameState = GameState::LevelScreen;
                 }
             } else {
                 // Single-Player Game
+                gameState = GameState::LevelScreen;
+            }
+        }
+        break;
+
+        // Level Screen
+        case GameState::LevelScreen: {
+            a.fillRect(0, 0, 128, 17, WHITE);
+            Sprites::drawOverwrite(42, 0, levelBG, 0);
+            Sprites::drawOverwrite(54, 18, levelNumbs, 2);
+
+            a.setCursor(37,54);
+            a.print("BEGINNER");
+
+            if (a.justPressed(A_BUTTON)) {
                 gameState = GameState::Playing;
             }
         }
