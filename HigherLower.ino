@@ -38,7 +38,7 @@ int targetNumb = 0;
 int guessedNumb = 0;
 int randomLimit = 101;
 int levelIndex = 0;
-const char* levelNames[] = {"SIMPLE", "BEGINNER", "MEDIUM", "HARD", "GOOD LUCK"};
+const char* levelNames[] = {"BEGINNER", "NOVICE", "AVERAGE", "HARD", "GOOD LUCK"};
 
 
 // Setup - Run once at the beginning of the program
