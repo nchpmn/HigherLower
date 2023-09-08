@@ -13,7 +13,7 @@
 // 07 September 2023 (Begin v2.0.0 Rewrite)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "v2-dev-230907"
+#define VERSION "v2-dev-230908"
 
 // Arduboy Library Setup
 #include <Arduboy2.h>
@@ -130,6 +130,7 @@ void loop() {
             // Game Setup - ask for target number or randomly generate
             // Additional 2-Player Setup
             if (!modeSingle) {
+                a.invert(true);
                 Sprites::drawOverwrite(0, 0, targetHeader, 0);
 
                 // This is all to center the targetNumb
@@ -146,6 +147,7 @@ void loop() {
 
                 pickNumber(targetNumb, randomLimit, true, a, sound);
                 if (a.justPressed(A_BUTTON)) {
+                    a.invert(false);
                     gameState = GameState::Playing;
                 }
             } else {

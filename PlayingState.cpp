@@ -22,7 +22,12 @@ void PlayingState::reset() {
 }
 
 void PlayingState::guess() {
-    Sprites::drawOverwrite(0, 0, playHeader, 0);
+    if (modeSingle) {
+        Sprites::drawOverwrite(0, 0, playHeader, 0);
+    } else {
+        Sprites::drawOverwrite(0, 0, playP2Header, 0);
+    }
+    
     
     // Draw guessedNumb to screen
     static int y = 26;

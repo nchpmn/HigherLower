@@ -7,8 +7,9 @@
 extern const uint8_t PROGMEM title[];
 extern const uint8_t PROGMEM credits[];
 extern const uint8_t PROGMEM modeSelect[];
-extern const uint8_t PROGMEM targetHeader[];
 extern const uint8_t PROGMEM playHeader[];
+extern const uint8_t PROGMEM targetHeader[];
+extern const uint8_t PROGMEM playP2Header[];
 extern const uint8_t PROGMEM win[];
 extern const uint8_t PROGMEM lose[];
 

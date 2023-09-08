@@ -11,6 +11,7 @@ extern bool playerWin;
 extern int targetNumb;
 extern int guessedNumb;
 extern int randomLimit;
+extern bool modeSingle;
 extern GameState gameState;
 
 class PlayingState {
