@@ -37,7 +37,8 @@ bool playerWin = false;
 int targetNumb = 0;
 int guessedNumb = 0;
 int randomLimit = 101;
-int level = 1;
+int levelIndex = 0;
+const char* levelNames[] = {"SIMPLE", "BEGINNER", "MEDIUM", "HARD", "GOOD LUCK"};
 
 
 // Setup - Run once at the beginning of the program
@@ -161,13 +162,14 @@ void loop() {
         // Level Screen
         case GameState::LevelScreen: {
             a.fillRect(0, 0, 128, 17, WHITE);
-            Sprites::drawOverwrite(42, 0, levelBG, 0);
-            Sprites::drawOverwrite(54, 18, levelNumbs, 2);
+            Sprites::drawOverwrite(42, 0, levelTitle, 0);
+            Sprites::drawOverwrite(54, 18, levelNumbs, levelIndex);
 
             a.setCursor(37,54);
-            a.print("BEGINNER");
+            a.print(levelNames[levelIndex]);
 
             if (a.justPressed(A_BUTTON)) {
+                levelIndex++;
                 gameState = GameState::Playing;
             }
         }
