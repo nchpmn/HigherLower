@@ -2,6 +2,8 @@
 
 **A simple game for the Arduboy. A game of logic, to guess the random number using only two clues: HIGHER or LOWER!**
 
+Includes increasing difficulty levels, a 2-Player mode and swanky graphics and tunes.
+
 ## Installation
 
 Grab the `.hex` from Releases (eventually). You can use some [Python Utilities](https://github.com/MrBlinky/Arduboy-Python-Utilities) or the excellent [GUI Toolset](https://github.com/randomouscrap98/arduboy_toolset) created from those scripts to get the game on your Arduboy.
@@ -12,10 +14,7 @@ Please raise issues for bugs or feature requests.
 
 ## Roadmap
 
-I have two significant features I would like implemented in the future:
-
-1. Added difficulty levels (see [#10](https://github.com/nchpmn/HigherLower/issues/10) for discussion)
-2. 2-player game mode (see [#12](https://github.com/nchpmn/HigherLower/issues/12))
+There's not a lot left to add! Please get in touch with requests.
 
 ## License
 

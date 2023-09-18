@@ -1,0 +1,17 @@
+1. Title Screen: has two options, Credits or Mode Select
+
+2. Credits. Only returns to Title Screen
+
+3. Mode Select: User can select from 1-player or 2-player game.
+
+3b. Target Number: If a 2-player game is selected, ask one player for the target number to guess. Then, return to Game Setup using this number instead of a ranomly-generated one.
+
+4. Game Setup: Generate the random target number to be guessed, as well as resetting any variables etc.
+
+5. Main Game: Ask the user for their guess, then detemine if they are right or wrong.
+
+5b. Correct Guess: The user has correctly guessed the target number. Continue to End Screen, showing a winning message.
+
+5c. Incorrect Guess: If the user still has attempts remaining, return to Main Game and ask for their next guess. If they have run out of attempts, Continue to End Screen, showing a losing message.
+
+6. End Screen: Show a winning or losing message. Allow the player to restart the game. If they were playing a 2-player game, return to Target Number. If they were playing a 1-player game, return to Game Setup.
