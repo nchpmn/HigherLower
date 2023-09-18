@@ -13,7 +13,7 @@
 // 07 September 2023 (Begin v2.0.0 Rewrite)
 // Nathan Chapman -- @nchpmn
 
-#define VERSION "v2-dev-230908"
+#define VERSION "v2-dev-230918"
 
 // Arduboy Library Setup
 #include <Arduboy2.h>
@@ -38,7 +38,8 @@ int targetNumb = 0;
 int guessedNumb = 0;
 int randomLimit = 101;
 int levelIndex = 0;
-const char* levelNames[] = {"BEGINNER", "NOVICE", "AVERAGE", "HARD", "GOOD LUCK"};
+const char* levelNames[] = {"BEGINNER", "NOVICE", "AVERAGE", "HARD", "VERY HARD", "GOOD LUCK"};
+int levelAttempts[] = {10, 8, 7, 6, 5, 1};
 
 
 // Setup - Run once at the beginning of the program
@@ -150,7 +151,8 @@ void loop() {
                 pickNumber(targetNumb, randomLimit, true, a, sound);
                 if (a.justPressed(A_BUTTON)) {
                     a.invert(false);
-                    gameState = GameState::LevelScreen;
+                    levelIndex = 0;
+                    gameState = GameState::Playing;
                 }
             } else {
                 // Single-Player Game
@@ -169,7 +171,6 @@ void loop() {
             a.print(levelNames[levelIndex]);
 
             if (a.justPressed(A_BUTTON)) {
-                levelIndex++;
                 gameState = GameState::Playing;
             }
         }

@@ -13,6 +13,8 @@ extern int guessedNumb;
 extern int randomLimit;
 extern bool modeSingle;
 extern GameState gameState;
+extern int levelIndex;
+extern int levelAttempts[];
 
 class PlayingState {
 public:

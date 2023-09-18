@@ -14,7 +14,7 @@ void PlayingState::reset() {
     a.digitalWriteRGB(RGB_OFF,RGB_OFF,RGB_OFF);
 
     // Reset variables to starting state
-    attempts = 0;
+    attempts = 0; // Different level attempts set by levelAttempts[levelIndex]
     lastGuess = 0;
     targetNumb = random(1,randomLimit); // random() generates high-1
     guessedNumb = random(1,randomLimit);
@@ -45,7 +45,7 @@ void PlayingState::guess() {
     // Draw attempts remaining
     a.setCursor(29,43);
     a.print("Attempts: ");
-    a.print(7 - attempts);
+    a.print(levelAttempts[levelIndex] - attempts);
 
     // And a hint
     if(attempts > 0) {
@@ -71,15 +71,17 @@ void PlayingState::guess() {
 
             // Transition the game into the 'player win' state
             playerWin = true;
+            levelIndex++;
             gameState = GameState::EndScreen;
             
         } else {
             attempts++;
-            if (attempts == 7) {
+            if (attempts == levelAttempts[levelIndex]) {
                 // Play the "you lose" tune
                 sound.tones(loseSong);
 
                 // Transition to 'player lose' state
+                levelIndex = 0;
                 gameState = GameState::EndScreen;
             } else {
                 lastGuess = guessedNumb;
