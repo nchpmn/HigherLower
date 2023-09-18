@@ -165,9 +165,10 @@ void loop() {
         case GameState::LevelScreen: {
             a.fillRect(0, 0, 128, 17, WHITE);
             Sprites::drawOverwrite(42, 0, levelTitle, 0);
-            Sprites::drawOverwrite(54, 18, levelNumbs, levelIndex);
+            Sprites::drawOverwrite(54, 20, levelNumbs, levelIndex);
 
-            a.setCursor(37,54);
+            int xOffset = (128 - (strlen(levelNames[levelIndex]))*6-1) / 2;
+            a.setCursor(xOffset,52);
             a.print(levelNames[levelIndex]);
 
             if (a.justPressed(A_BUTTON)) {
