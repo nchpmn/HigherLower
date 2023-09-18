@@ -26,6 +26,7 @@ ArduboyTones sound(a.audio.enabled);
 #include "gameUtils.h"  // Custom functions available everywhere
 #include "graphics.h" // Bitmap arrays
 #include "music.h" // Tones and beeps
+#include "levelList.h" // List of levels and difficulties
 #include "gameState.h" // Global State Machine Class
 GameState gameState = GameState::Title;
 #include "playingState.h" // GameState::Playing split into its own file
@@ -38,8 +39,20 @@ int targetNumb = 0;
 int guessedNumb = 0;
 int randomLimit = 101;
 int levelIndex = 0;
-const char* levelNames[] = {"BEGINNER", "NOVICE", "AVERAGE", "HARD", "VERY HARD", "GOOD LUCK"};
-int levelAttempts[] = {10, 8, 7, 6, 5, 1};
+
+// Define the items in the array
+levelList levels[] = {
+    {"BEGINNER", 20},
+    {"NOVICE", 15},
+    {"EASY", 12},
+    {"TRICKY", 10},
+    {"PUZZLING", 8},
+    {"CHALLENGING", 7},
+    {"EXPERT", 6},
+    {"ENIGMA", 5},
+    {"SAGE", 5},
+    {"GOOD LUCK!", 1}
+};
 
 
 // Setup - Run once at the beginning of the program
@@ -167,9 +180,9 @@ void loop() {
             Sprites::drawOverwrite(42, 0, levelTitle, 0);
             Sprites::drawOverwrite(54, 20, levelNumbs, levelIndex);
 
-            int xOffset = (128 - (strlen(levelNames[levelIndex]))*6-1) / 2;
+            int xOffset = (128 - (strlen(levels[levelIndex].name))*6-1) / 2;
             a.setCursor(xOffset,52);
-            a.print(levelNames[levelIndex]);
+            a.print(levels[levelIndex].name);
 
             if (a.justPressed(A_BUTTON)) {
                 gameState = GameState::Playing;

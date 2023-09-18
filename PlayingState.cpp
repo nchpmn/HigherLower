@@ -3,6 +3,9 @@
 #include "graphics.h"
 #include "music.h"
 #include "gameState.h"
+#include "levelList.h" // List of levels and difficulties
+
+extern levelList levels[];
 
 // Constructor
 PlayingState::PlayingState(Arduboy2& arduboy, ArduboyTones& tones) : a(arduboy), sound(tones) {
@@ -45,7 +48,7 @@ void PlayingState::guess() {
     // Draw attempts remaining
     a.setCursor(29,43);
     a.print("Attempts: ");
-    a.print(levelAttempts[levelIndex] - attempts);
+    a.print(levels[levelIndex].attempts - attempts);
 
     // And a hint
     if(attempts > 0) {
@@ -76,7 +79,7 @@ void PlayingState::guess() {
             
         } else {
             attempts++;
-            if (attempts == levelAttempts[levelIndex]) {
+            if (attempts == levels[levelIndex].attempts) {
                 // Play the "you lose" tune
                 sound.tones(loseSong);
 
