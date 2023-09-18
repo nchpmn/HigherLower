@@ -178,7 +178,15 @@ void loop() {
         case GameState::LevelScreen: {
             a.fillRect(0, 0, 128, 17, WHITE);
             Sprites::drawOverwrite(42, 0, levelTitle, 0);
-            Sprites::drawOverwrite(54, 20, levelNumbs, levelIndex);
+            if (levelIndex > 9) {
+                // Single-digit level numbers
+                Sprites::drawOverwrite(54, 20, levelNumbs, levelIndex);
+            } else {
+                // The final level
+                Sprites::drawOverwrite(45, 20, levelNumbs, 0);
+                Sprites::drawOverwrite(63, 20, levelNumbs, 9);
+            }
+
 
             int xOffset = (128 - (strlen(levels[levelIndex].name))*6-1) / 2;
             a.setCursor(xOffset,52);
