@@ -206,8 +206,9 @@ void loop() {
             if (playerWin) {
                 // Write our win grapic to screen at position x0 y0
                 Sprites::drawOverwrite(0, 0, win, 0);
-                a.setCursor(74,4);
+                a.setCursor(83,9);
                 a.setTextSize(2);
+                a.setTextBackground(WHITE);
                 a.setTextColor(BLACK);
                 a.print(targetNumb);
                 a.digitalWriteRGB(RGB_OFF,RGB_ON,RGB_OFF);
@@ -222,6 +223,9 @@ void loop() {
 
             if (a.justPressed(A_BUTTON)) {
                 playingState.reset(); // Reset Game variables for new game
+                a.setTextSize(1);
+                a.setTextColor(WHITE);
+                a.setTextBackground(BLACK);
                 gameState = GameState::GameSetup;
             }
         }
