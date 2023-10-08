@@ -226,7 +226,11 @@ void loop() {
                 a.setTextSize(1);
                 a.setTextColor(WHITE);
                 a.setTextBackground(BLACK);
-                gameState = GameState::GameSetup;
+                if (playerWin) {
+                    gameState = GameState::GameSetup;
+                } else {
+                    gameState = GameState::ModeSelect;
+                }
             }
         }
         break;
