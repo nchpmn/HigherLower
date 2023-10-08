@@ -214,7 +214,8 @@ void loop() {
             }
 
             if (a.justPressed(A_BUTTON)) {
-                gameState = GameState::ModeSelect;
+                playingState.reset(); // Reset Game variables for new game
+                gameState = GameState::GameSetup;
             }
         }
         break;
