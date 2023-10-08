@@ -15,7 +15,7 @@
 // Nathan Chapman -- @nchpmn
 
 
-#define VERSION "v2.1.0dev"
+#define VERSION "v2.0.1dev"
 
 // Arduboy Library Setup
 #include <Arduboy2.h>
