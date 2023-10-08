@@ -206,10 +206,17 @@ void loop() {
             if (playerWin) {
                 // Write our win grapic to screen at position x0 y0
                 Sprites::drawOverwrite(0, 0, win, 0);
+                a.setCursor(74,4);
+                a.setTextSize(2);
+                a.setTextColor(BLACK);
+                a.print(targetNumb);
                 a.digitalWriteRGB(RGB_OFF,RGB_ON,RGB_OFF);
             } else {
-                // Write our win grapic (array) to screen at position x0 y0
+                // Write our lose grapic (array) to screen at position x0 y0
                 Sprites::drawOverwrite(0, 0, lose, 0);
+                a.setCursor(93,44);
+                a.setTextSize(2);
+                a.print(targetNumb);
                 a.digitalWriteRGB(RGB_ON,RGB_OFF,RGB_OFF);
             }
 
