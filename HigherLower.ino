@@ -44,15 +44,10 @@ int levelIndex = 0;
 
 // Define the items in the array
 levelList levels[] = {
-    {"BEGINNER", 20},
-    {"NOVICE", 15},
-    {"EASY", 12},
-    {"TRICKY", 10},
-    {"PUZZLING", 8},
-    {"CHALLENGING", 7},
-    {"EXPERT", 6},
-    {"ENIGMA", 5},
-    {"SAGE", 5},
+    {"NOVICE", 10},
+    {"EASY", 7},
+    {"TRICKY", 6},
+    {"CHALLENGING", 5},
     {"GOOD LUCK!", 1}
 };
 
